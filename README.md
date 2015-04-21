@@ -38,4 +38,6 @@ python duoshuo-migrator.py -i ~/Desktop/export.json  -o a.xml
 
 希望我顺手造的轮子能在你逃离多说拥抱 Disqus 的时候，帮你减少麻烦节省时间，也希望我的贡献让这个世界稍微变得美好了那么一点点~
 
+
+
 [1]: http://www.yinwang.org/blog-cn/2013/04/13/generality/
