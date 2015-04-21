@@ -65,6 +65,9 @@ def json2objects(json_obj):
         parent_id = cmnt.get('parent_id', '0')
         content = cmnt['message']
         comment = Comment(id, author_name, author_email, author_url, ip, date, approved, parent_id, content)
+        if article_id not in id_to_article:
+            print >> sys.stderr, "article not found for thread_id %s" %(article_id)
+            continue
         id_to_article[article_id].add_comment(comment)
 
     return id_to_article.values()
