@@ -62,7 +62,12 @@ def json2objects(json_obj):
         ip = cmnt['ip']
         date = cmnt['created_at'][:19].replace('T', ' ')
         approved = '1'
-        parent_id = cmnt.get('parent_id', '0')
+        parent_ids = cmnt.get('parents', [])
+        if parent_ids is None:
+            parent_ids = []
+        parent_id = '0'
+        if len(parent_ids) > 0:
+            parent_id = parent_ids[0]
         content = cmnt['message']
         comment = Comment(id, author_name, author_email, author_url, ip, date, approved, parent_id, content)
         if article_id not in id_to_article:
@@ -108,7 +113,7 @@ def objects2xml(articles):
                 content = ''
             etree.SubElement(cmnt, '{' + wp_ns + '}comment_content').text = etree.CDATA(content)
             etree.SubElement(cmnt, '{' + wp_ns + '}comment_approved').text = '1'
-            etree.SubElement(cmnt, '{' + wp_ns + '}comment_parent').text = comment.parent_id
+            etree.SubElement(cmnt, '{' + wp_ns + '}comment_parent').text = str(comment.parent_id)
     result = etree.tostring(root, encoding="UTF-8", xml_declaration=True, pretty_print=True)
     return result
 
