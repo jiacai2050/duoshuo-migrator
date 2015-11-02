@@ -97,7 +97,7 @@ def objects2xml(articles):
             remote = etree.SubElement(cmnt, '{http://www.disqus.com/}remote')
             etree.SubElement(remote, '{http://www.disqus.com/}id').text = ''
             etree.SubElement(remote, '{http://www.disqus.com/}avatar').text = ''
-            etree.SubElement(cmnt, '{' + wp_ns + '}comment_id').text = comment.id
+            etree.SubElement(cmnt, '{' + wp_ns + '}comment_id').text = str(comment.id)
             etree.SubElement(cmnt, '{' + wp_ns + '}comment_author').text = comment.author_name
             etree.SubElement(cmnt, '{' + wp_ns + '}comment_author_email').text = comment.author_email
             etree.SubElement(cmnt, '{' + wp_ns + '}comment_author_url').text = comment.author_url
