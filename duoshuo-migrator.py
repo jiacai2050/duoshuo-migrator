@@ -1,4 +1,4 @@
-#!/use/bin/env python
+#!/usr/bin/env python
 
 import sys
 import json
@@ -27,13 +27,11 @@ class Comment(object):
 
 class Article(object):
 
-    def __init__(self, id, title, link, identifier, comment_status):
+    def __init__(self, id, title, link, comment_status):
         super(Article, self).__init__()
         self.id = id
         self.title = title
         self.link = link
-        self.link = link
-        self.identifier = identifier
         self.comment_status = comment_status
         self.comments = []
 
@@ -50,8 +48,7 @@ def json2objects(json_obj):
         id = art['thread_id']
         title = art['title']
         link = art['url']
-        identifier = art['thread_key']
-        id_to_article[id] = Article(id, title, link, identifier, 'open')
+        id_to_article[id] = Article(id, title, link, 'open')
     
     for cmnt in comments:
         article_id = cmnt['thread_id']
@@ -93,7 +90,7 @@ def objects2xml(articles):
         etree.SubElement(item, 'title').text = article.title
         etree.SubElement(item, 'link').text = article.link
         etree.SubElement(item, '{http://purl.org/rss/1.0/modules/content/}encoded').text = etree.CDATA('')
-        etree.SubElement(item, '{http://www.disqus.com/}thread_identifier').text = article.identifier
+        etree.SubElement(item, '{http://www.disqus.com/}thread_identifier').text = str(article.id)
         etree.SubElement(item, '{' + wp_ns + '}post_date_gmt').text = ''
         etree.SubElement(item, '{' + wp_ns + '}comment_status').text = article.comment_status
 
