@@ -22,7 +22,7 @@
 
 2. 登录多说后台，在`http://<shortname>.duoshuo.com/admin/tools/` 页面导出多说评论
     ![export_duoshuo](screenshot/duoshuo_export.png)
-3. 使用`duoshuo-migrator.py`将步骤 2 导出的评论转为`WXR`格式。 
+3. 使用`duoshuo-migrator.py`将步骤 2 导出的评论转为 [disqus 支持的 XML](https://help.disqus.com/customer/portal/articles/472150-custom-xml-import-format) 格式的文件。 
     `duoshuo-migrator.py`有三个参数：
     * `-h` 查看帮助
     * `-i` 指定输入文件，默认从 stdin 读取，
