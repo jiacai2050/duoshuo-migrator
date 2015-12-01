@@ -15,9 +15,11 @@
 # 用法 #
 
 1. 下载 [duoshuo-migrator.py](./duoshuo-migrator.py?raw=true)，并安装依赖
+
     ```bash
     pip install lxml
     ```
+
 2. 登录多说后台，在`http://<shortname>.duoshuo.com/admin/tools/` 页面导出多说评论
     ![export_duoshuo](screenshot/duoshuo_export.png)
 3. 使用`duoshuo-migrator.py`将步骤 2 导出的评论转为`WXR`格式。 
