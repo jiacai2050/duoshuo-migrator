@@ -14,23 +14,30 @@
 
 # 用法 #
 
-这个脚本依赖 lxml 来生成 XML 文件，所以使用之前需要把这个依赖给装好。
+1. 下载 [duoshuo-migrator.py](./duoshuo-migrator.py?raw=true)，并安装依赖
+    ```bash
+    pip install lxml
+    ```
+2. 登录多说后台，在`http://<shortname>.duoshuo.com/admin/tools/` 页面导出多说评论
+    ![export_duoshuo](screenshot/duoshuo_export.png)
+3. 使用`duoshuo-migrator.py`将步骤 2 导出的评论转为`WXR`格式。 
+    `duoshuo-migrator.py`有三个参数：
+    * `-h` 查看帮助
+    * `-i` 指定输入文件，默认从 stdin 读取，
+    * `-o` 指定输出文件，默认输出到 stdout。
 
-```bash
-pip install lxml
-```
+    一般可以这么用：
 
-这个脚本的参数其实很少，-h 查看帮助，-i 指定输入文件，如果不指定就从 stdin 读取，-o 指定输出文件，如果不指定就输出到 stdout。
+    ```
+    python duoshuo-migrator.py -i ~/Desktop/export.json  -o disqus.xml
+    ```
 
-我一般这么用：
+    如果程序执行的过程中发现有文章的标题为空，会往 stderr 中输出一些信息来提醒用户注意，比如这样：
 
-```
-python duoshuo-migrator.py -i ~/Desktop/export.json  -o a.xml
-```
+    > found article without title, id=1173938669371785301, link=http://www.jamespan.me/blog/2015/01/22/trick-of-paging-query/
 
-如果程序执行的过程中发现有文章的标题为空，会往 stderr 中输出一些信息来提醒用户注意，比如这样：
-
-> found article without title, id=1173938669371785301, link=http://www.jamespan.me/blog/2015/01/22/trick-of-paging-query/
+4. 登录 disqus 后台，在`https://<shortname>.disqus.com/admin/discussions/import/platform/wordpress/` 页面选择步骤 3 中导出的`xml`文件
+    ![disqus_import](screenshot/disqus_import.png)    
 
 # 最后 #
 
